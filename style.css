@@ -1,7 +1,7 @@
 
 body {
     font-family:'Courier New', Courier, monospace;
-    color: white;
+    color: rgb(15, 14, 14);
 }
 *{
     text-align: center;
@@ -17,17 +17,68 @@ body {
     font-size: var(--altura2);
 }
 .Preguntas{
+    color: var(--color-pregunta);
     font-size: var(--altura3);
 }
 .Opciones{
     font-size: var(--altura3);
+    color: var(--color-opciones);
+    background-color: var(--color-pregunta);
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover{
+        background-color: var(--respuesta-correcta);
+    }
+
 }
 
+.contenedor-tiempo{
+    text-align: center;
+    background-color: var(--color-pregunta);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+.tiempo{
+    font-size: 3rem;
+    margin: 1rem 0;
+    color: #333;
+    font-family:'Courier New', Courier, monospace;
+}
+.timer{
+    font-size: var(--altura2) ;
+    border-radius: 5px ;
+    font-family:'Courier New', Courier, monospace;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.comenzar{
+    font-family:'Courier New', Courier, monospace;
+}
+.pausar{
+    font-family:'Courier New', Courier, monospace;
+}
+
+.resetear{
+    font-family:'Courier New', Courier, monospace;
+}
+
+
+
 :root{
-    --color-fondo: #2262c2;
+    --color-fondo: #2161c2;
+    --color-pregunta: #d9dbdc;
+    --color-opciones: #000000;
     --altura: 2rem; 
     --altura2: 1rem;
     --altura3: 1.5rem;
+    --respuesta-correcta: #a55a25;
 }
 
 body{
