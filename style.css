@@ -76,9 +76,46 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.comenzarbtn { background-color: #28a745; }
-.pausarbtn { background-color: #ffc107; color: #212529; }
-.resetearbtn { background-color: #dc3545; }
+.comenzarbtn { background-color: #28a745; 
+                display: block;
+                width: 150px;
+                padding: 12px;
+                margin: 25px auto 0;
+                border-radius: 30px;
+                border: none;
+                font-weight: bold;
+                cursor: pointer;
+                transition: var(--transicion);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                }
+.pausarbtn { background-color: #ffc107; color: #212529; 
+            display: block;
+            width: 150px;
+            padding: 12px;
+            margin: 25px auto 0;
+            border-radius: 30px;
+            border: none;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+}
+.resetearbtn { background-color: #dc3545; 
+            display: block;
+            width: 150px;
+            padding: 12px;
+            margin: 25px auto 0;
+            border-radius: 30px;
+            border: none;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transicion);
+            text-transform: uppercase;
+            letter-spacing: 1px;}
 
 /* Header */
 header {
