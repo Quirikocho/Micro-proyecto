@@ -7,37 +7,296 @@
     <title>MicroProyecto</title>
 </head>
 <body>
-
-    <div class="container">
-    <Section>
-        <h1>BIENVENIDO A ESTE QUIZ MATEMATICO</h1>
-        <p>Hecho por Juan Moreira y Jose Saggiomo</p>
-        <div id="Preguntas">
-            <h2 class="Inicio">Estas preparado?</h2>
-        </div>
-            <h3 class="Preguntas"> 1. ¿Cual es el valor de pi</h3>
-            <label class = "Opciones">
-                <input type="radio" value="1" name="p0"> 3,16
-            </label>
-            <label class = "Opciones">
-                <input type="radio" value="2" name="p0"> 2,41
-            </label>
-            <label class = "Opciones">
-                <input type="radio" value="3" name="p0"> 3,14
-            </label >
-            <label class = "Opciones">
-                <input type="radio" value="4" name="p0"> 0
-            </label>
-    </section>
-
-    <button>Finalizar</button>
+<header>
+    <h1>BIENVENIDO A ESTE QUIZ MATEMATICO</h1>
+    <p>Hecho por Juan Moreira y Jose Saggiomo</p>
     <div class="contenedor-tiempo">
         <div class="tiempo"> 00:00:00 </div>
         <div class="timer">
-            <button class="comenzar"> comenzar </button>
-            <button class="pausar"> pausar </button>
-            <button class="resetear"> resetear </button>
+            <button class="comenzarbtn"> comenzar </button>
+            <button class="pausarbtn"> pausar </button>
+            <button class="resetearbtn"> resetear </button>
         </div>
+</div>
+    </header>
+    <div class="container">
+        <Section>
+            <div id="Preguntas">
+                <h2 class="Inicio">Estas preparado?</h2>
+            </div>
+                <h3 class="Preguntas"> 1. ¿Cual es el valor de π? </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p0" onclick="respuesta(0,this)"> 3,16
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p0" onclick="respuesta(0,this)"> 2,41
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p0" onclick="respuesta(0,this)"> 3,14
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p0" onclick="respuesta(0,this)"> 0
+                </label>
+                
+        </section>
+        <Section>
+            <h3 class="Preguntas"> 2. ¿El MCD de 24 y 36 es:? </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p1" onclick="respuesta(1,this)" > 3
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p1" onclick="respuesta(1,this)"> 16
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p1" onclick="respuesta(1,this)"> 2
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p1" onclick="respuesta(1,this)"> 12
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 3. Si y = 2x + 1 y x= 4 ¿Cuanto vale y? </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p2" onclick="respuesta(2,this)"> 9
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p2" onclick="respuesta(2,this)"> 8
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p2" onclick="respuesta(2,this)"> 10
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p2" onclick="respuesta(2,this)"> 12
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 4. El volumen de un cubo de arista 3 cm es: </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p3" onclick="respuesta(2,this)"> 8 cm^3
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p3" onclick="respuesta(2,this)"> 125 cm^3
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p3" onclick="respuesta(2,this)"> 81 cm^3
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p3" onclick="respuesta(2,this)"> 27 cm^3
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 5.¿Qué expresión es equivalente a 3a - 6b?: </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p4" onclick="respuesta(2,this)"> 3(a + 2b)
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p4" onclick="respuesta(2,this)"> 3(a - 2b)
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p4" onclick="respuesta(2,this)"> 6 (a - b)
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p4" onclick="respuesta(2,this)"> 3a (1 - 2b)
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 6. Cual es la derivada de f(x)= e^2x: </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p5" onclick="respuesta(2,this)"> e^2x
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p5" onclick="respuesta(2,this)"> 2e^2
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p5" onclick="respuesta(2,this)"> xe^2x
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p5" onclick="respuesta(2,this)"> 2e^2x
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 7. La mediana de estos números es: {2, 10, 32, 4, 16, 22} </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p6" onclick="respuesta(2,this)"> 10
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p6" onclick="respuesta(2,this)"> 16
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p6" onclick="respuesta(2,this)"> 2
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p6" onclick="respuesta(2,this)"> 32
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 8. La raiz cuadrada de 121: </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p7" onclick="respuesta(2,this)"> 7
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p7" onclick="respuesta(2,this)"> 10
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p7" onclick="respuesta(2,this)"> 11
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p7" onclick="respuesta(2,this)"> No es cuadrado perfecto
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 9. ¿Cuál es el menor número divisible por 2, 3 y 5? : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p8" onclick="respuesta(2,this)"> 15
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p8" onclick="respuesta(2,this)"> 20
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p8" onclick="respuesta(2,this)"> 25
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p8" onclick="respuesta(2,this)"> 30
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 10. Un pastor tiene 15 ovejas y se les escapa 8. ¿Cuántas quedan? : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p9" onclick="respuesta(2,this)"> 15
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p9" onclick="respuesta(2,this)"> 6
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p9" onclick="respuesta(2,this)"> 7
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p9" onclick="respuesta(2,this)"> 8
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 11.¿Cuál es el resultado de 100 / (2+3) x 2? : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p10" onclick="respuesta(2,this)"> 40
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p10" onclick="respuesta(2,this)"> 50
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p10" onclick="respuesta(2,this)"> 10
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p10" onclick="respuesta(2,this)"> 30
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 12. ¿Qué número es el siguiente en la secuencia: 0, 1, 1, 2, 3, 5, ___?  : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p11" onclick="respuesta(2,this)"> 9
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p11" onclick="respuesta(2,this)"> 10
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p11" onclick="respuesta(2,this)"> 11
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p11" onclick="respuesta(2,this)"> 8
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 13. Un cuadrado tiene 4 esquinas. Si le corto 1 esquina, ¿cuántas esquinas le quedan?: </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p12" onclick="respuesta(2,this)"> 5
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p12" onclick="respuesta(2,this)"> 4
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p12" onclick="respuesta(2,this)"> 3 
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p12" onclick="respuesta(2,this)"> 9
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 14. Si 3 lápices cuestan $6, ¿cuánto cuestan 5 lápices? : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p13" onclick="respuesta(2,this)"> 10
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p13" onclick="respuesta(2,this)"> 20
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p13" onclick="respuesta(2,this)"> 9
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p13" onclick="respuesta(2,this)"> 12
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 15. Si en un triangulo rectandulo se divide seno/coseno, ¿qué obtienes? : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p14" onclick="respuesta(2,this)"> Cotangente
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p14" onclick="respuesta(2,this)"> ArcoCoseno
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p14" onclick="respuesta(2,this)"> Tangente
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p14" onclick="respuesta(2,this)"> Secante
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 16. ¿Cuánto es la mitad de 2+2?: </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p15" onclick="respuesta(2,this)"> 2
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p15" onclick="respuesta(2,this)"> 0
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p15" onclick="respuesta(2,this)"> 1
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p15" onclick="respuesta(2,this)"> 8
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 17. ¿Cuál es el resultado de (x + 3)(x - 2)?  : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p16" onclick="respuesta(2,this)"> x^2 + 2x +6
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p16" onclick="respuesta(2,this)"> x^2 + x + 6
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p16" onclick="respuesta(2,this)"> x^2 - 5
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p16" onclick="respuesta(2,this)"> -x^2 + x+ 6
+                </label>
+        </Section>
+        <Section>
+            <h3 class="Preguntas"> 18. ¿Cuántos lados tiene un hexágono? : </h3>
+                <label class = "Opciones">
+                    <input type="radio" value="1" name="p17" onclick="respuesta(2,this)"> 8
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="2" name="p17" onclick="respuesta(2,this)"> 3
+                </label>
+                <label class = "Opciones">
+                    <input type="radio" value="3" name="p17" onclick="respuesta(2,this)"> 5
+                </label >
+                <label class = "Opciones">
+                    <input type="radio" value="4" name="p17" onclick="respuesta(2,this)"> 6
+                </label>
+        </Section>
+    </div>
+
+    
 
 
     </div>
