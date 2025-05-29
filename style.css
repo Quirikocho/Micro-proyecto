@@ -1,0 +1,36 @@
+
+body {
+    font-family:'Courier New', Courier, monospace;
+    color: white;
+}
+*{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    font-size: var(--altura);
+}
+.Inicio{
+    font-size: var(--altura2);
+}
+.Preguntas{
+    font-size: var(--altura3);
+}
+.Opciones{
+    font-size: var(--altura3);
+}
+
+:root{
+    --color-fondo: #2262c2;
+    --altura: 2rem; 
+    --altura2: 1rem;
+    --altura3: 1.5rem;
+}
+
+body{
+    background-color: #2262c2;
+}
+
