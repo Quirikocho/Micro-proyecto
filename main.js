@@ -38,7 +38,7 @@ const todasLasPreguntas = [
     },
     {
         id: 6,
-        pregunta: "7. La mediana de estos números es: {2, 10, 32, 4, 16, 22}",
+        pregunta: "7. La mediana de estos números es: {2, 10, 32, 4, 16, 22, 50}",
         opciones: ["10", "16", "2", "32"],
         respuestaCorrecta: 1 // 16 es la opción 2 
     },
@@ -56,7 +56,7 @@ const todasLasPreguntas = [
     },
     {
         id: 9,
-        pregunta: "10. Un pastor tiene 15 ovejas y se les escapa 8.",
+        pregunta: "10. Un pastor tiene 15 ovejas y se les escapa 8 ¿Cuantas ovejas quedan?.",
         opciones: ["15", "6", "7", "8"],
         respuestaCorrecta: 3 // 8 es la opción 4 
     },
@@ -99,7 +99,7 @@ const todasLasPreguntas = [
     {
         id: 16,
         pregunta: "17. ¿Cuál es el resultado de (x + 3)(x - 2)?",
-        opciones: ["x^2 + 2x +6", "x^2 + x + 6", "x^2 - 5", "-x^2 + x+ 6"],
+        opciones: ["x^2 + 2x +6", "x^2 + x - 6", "x^2 - 5", "-x^2 + x+ 6"],
         respuestaCorrecta: 1 // x^2 + x - 6 
     },
     {
@@ -146,7 +146,7 @@ function seleccionarPreguntasAleatorias() {
     // Mezcla las preguntas usando el algoritmo Fisher-Yates
     const shuffled = [...todasLasPreguntas].sort(() => 0.5 - Math.random());
     preguntasSeleccionadas = shuffled.slice(0, NUM_PREGUNTAS);
-    opcion_elegida = new Array(NUM_PREGUNTAS).fill(-1);
+    opcion_elegida = new Array(NUM_PREGUNTAS).fill(-1); // -1 significa no respondida
 }
 
 function mostrarPreguntas() {
@@ -158,7 +158,9 @@ function mostrarPreguntas() {
             <h3 class="Preguntas">${pregunta.pregunta}</h3>
             ${pregunta.opciones.map((opcion, i) => `
                 <label class="Opciones">
-                    <input type="radio" value="${i}" name="p${index}" onclick="respuesta(${index}, this)">
+                    <input type="radio" value="${i}" name="p${index}" 
+                           ${opcion_elegida[index] === i ? 'checked' : ''}
+                           onclick="respuesta(${index}, ${i})">
                     ${opcion}
                 </label>
             `).join('')}
@@ -167,20 +169,9 @@ function mostrarPreguntas() {
     });
 }
 
-function respuesta(pregunta_num, seleccionada) {
-    // Desmarcar todas las opciones de la pregunta actual
-    const section = seleccionada.closest('section');
-    const labels = section.querySelectorAll('.Opciones');
-    
-    labels.forEach(label => {
-        label.style.backgroundColor = "white";
-    });
-    
-    // Marcar la opción seleccionada
-    seleccionada.parentNode.style.backgroundColor = "#cec0fc";
-    
-    // Guardar la elección
-    opcion_elegida[pregunta_num] = parseInt(seleccionada.value);
+function respuesta(pregunta_num, opcion_num) {
+    // Guarda la opción seleccionada
+    opcion_elegida[pregunta_num] = opcion_num;
 }
 
 function calcularPuntaje() {
@@ -190,7 +181,11 @@ function calcularPuntaje() {
             cantidad_correctas++;
         }
     });
-    return cantidad_correctas;
+    return {
+        correctas: cantidad_correctas,
+        total: NUM_PREGUNTAS,
+        porcentaje: Math.round((cantidad_correctas / NUM_PREGUNTAS) * 100)
+    };
 }
 
 /* ========== FUNCIONES DEL TEMPORIZADOR ========== */
@@ -255,10 +250,24 @@ function iniciarQuiz() {
 
 function finalizarQuiz() {
     pausarTimer();
-    const puntaje = calcularPuntaje();
-    const tiempo = formatearTiempo(segundos);
     
-    alert(`¡Quiz completado!\n\nPuntaje: ${puntaje}/${NUM_PREGUNTAS}\nTiempo: ${tiempo}`);
+    const puntaje = calcularPuntaje();
+    const tiempoFormateado = formatearTiempo(segundos);
+    
+    // Crear un modal o alerta con los resultados
+    const resultadoHTML = `
+        <div class="resultado-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+            <div style="background: white; padding: 2rem; border-radius: 10px; text-align: center; max-width: 500px;">
+                <h2>Resultados del Quiz</h2>
+                <p>Respondiste <strong>${puntaje.correctas} de ${puntaje.total}</strong> preguntas correctamente</p>
+                <p>Porcentaje de aciertos: <strong>${puntaje.porcentaje}%</strong></p>
+                <p>Tiempo empleado: <strong>${tiempoFormateado}</strong></p>
+                <button onclick="this.parentElement.parentElement.remove()" style="padding: 0.5rem 1rem; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Aceptar</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', resultadoHTML);
 }
 
 /* ========== EVENT LISTENERS ========== */
