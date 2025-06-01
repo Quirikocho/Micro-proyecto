@@ -1,112 +1,124 @@
-// Array con todas las preguntas (formato mejorado)
+
 const todasLasPreguntas = [
     {
         id: 0,
         pregunta: "1. ¿Cual es el valor de π?",
         opciones: ["3,16", "2,41", "3,14", "0"],
-        respuestaCorrecta: 2 // 3,14 es la opción 3 (índice 2)
+        respuestaCorrecta: 2 // 3,14 es la opción 3 
     },
     {
         id: 1,
         pregunta: "2. ¿El MCD de 24 y 36 es:?",
         opciones: ["3", "16", "2", "12"],
-        respuestaCorrecta: 3 // 12 es la opción 4 (índice 3)
+        respuestaCorrecta: 3 // 12 es la opción 4 
     },
     {
         id: 2,
         pregunta: "3. Si y = 2x + 1 y x= 4 ¿Cuanto vale y?",
         opciones: ["9", "8", "10", "12"],
-        respuestaCorrecta: 0 // 9 es la opción 1 (índice 0)
+        respuestaCorrecta: 0 // 9 es la opción 1 
     },
     {
         id: 3,
         pregunta: "4. El volumen de un cubo de arista 3 cm es:",
         opciones: ["8 cm³", "125 cm³", "81 cm³", "27 cm³"],
-        respuestaCorrecta: 3 // 27 cm³ es la opción 4 (índice 3)
+        respuestaCorrecta: 3 // 27 cm³ es la opción 4 
     },
     {
         id: 4,
         pregunta: "5. ¿Qué expresión es equivalente a 3a - 6b?",
         opciones: ["3(a + 2b)", "3(a - 2b)", "6(a - b)", "3a(1 - 2b)"],
-        respuestaCorrecta: 1 // 3(a - 2b) es la opción 2 (índice 1)
+        respuestaCorrecta: 1 // 3(a - 2b) es la opción 2 
     },
     {
         id: 5,
         pregunta: "6. Cual es la derivada de f(x)= e^2x:",
         opciones: ["e^2x", "2e^2", "xe^2x", "2e^2x"],
-        respuestaCorrecta: 3 // 2e^2x es la opción 4 (índice 3)
+        respuestaCorrecta: 3 // 2e^2x es la opción 4 
     },
     {
         id: 6,
         pregunta: "7. La mediana de estos números es: {2, 10, 32, 4, 16, 22}",
         opciones: ["10", "16", "2", "32"],
-        respuestaCorrecta: 1 // 16 es la opción 2 (índice 1)
+        respuestaCorrecta: 1 // 16 es la opción 2 
     },
     {
         id: 7,
         pregunta: "8. La raiz cuadrada de 121:",
         opciones: ["7", "10", "11", "No es cuadrado perfecto"],
-        respuestaCorrecta: 2 // 11 es la opción 3 (índice 2)
+        respuestaCorrecta: 2 // 11 es la opción 3 
     },
     {
         id: 8,
         pregunta: "9. ¿Cuál es el menor número divisible por 2, 3 y 5?",
         opciones: ["15", "20", "25", "30"],
-        respuestaCorrecta: 3 // 30 es la opción 4 (índice 3)
+        respuestaCorrecta: 3 // 30 es la opción 4 
     },
     {
         id: 9,
         pregunta: "10. Un pastor tiene 15 ovejas y se les escapa 8.",
         opciones: ["15", "6", "7", "8"],
-        respuestaCorrecta: 3 // 8 es la opción 4 (índice 3)
+        respuestaCorrecta: 3 // 8 es la opción 4 
     },
     {
         id: 10,
         pregunta: "11. ¿Cuál es el resultado de 100 / (2+3) x 2?",
         opciones: ["40", "50", "10", "30"],
-        respuestaCorrecta: 0 // 40 es la opción 1 (índice 0)
+        respuestaCorrecta: 0 // 40 es la opción 1 
     },
     {
         id: 11,
         pregunta: "12. ¿Qué número es el siguiente en la secuencia: 0, 1, 1, 2, 3, 5, ___?",
         opciones: ["9", "10", "11", "8"],
-        respuestaCorrecta: 3 // 8 es la opción 4 (índice 3)
+        respuestaCorrecta: 3 // 8 es la opción 4 
     },
     {
         id: 12,
         pregunta: "13. Un cuadrado tiene 4 esquinas. Si le corto 1 esquina, ¿cuántas esquinas le quedan?",
         opciones: ["5", "4", "3", "9"],
-        respuestaCorrecta: 0 // 5 es la opción 1 (índice 0)
+        respuestaCorrecta: 0 // 5 es la opción 1 
     },
     {
         id: 13,
         pregunta: "14. Si 3 lápices cuestan $6, ¿cuánto cuestan 5 lápices?",
         opciones: ["10", "20", "9", "12"],
-        respuestaCorrecta: 0 // 10 es la opción 1 (índice 0)
+        respuestaCorrecta: 0 // 10 es la opción 1 
     },
     {
         id: 14,
         pregunta: "15. Si en un triangulo rectángulo se divide seno/coseno, ¿qué obtienes?",
         opciones: ["Cotangente", "ArcoCoseno", "Tangente", "Secante"],
-        respuestaCorrecta: 2 // Tangente es la opción 3 (índice 2)
+        respuestaCorrecta: 2 // Tangente es la opción 3 
     },
     {
         id: 15,
         pregunta: "16. ¿Cuánto es la mitad de 2+2?",
         opciones: ["2", "0", "1", "8"],
-        respuestaCorrecta: 0 // 2 es la opción 1 (índice 0)
+        respuestaCorrecta: 0 // 2 es la opción 1 
     },
     {
         id: 16,
         pregunta: "17. ¿Cuál es el resultado de (x + 3)(x - 2)?",
         opciones: ["x^2 + 2x +6", "x^2 + x + 6", "x^2 - 5", "-x^2 + x+ 6"],
-        respuestaCorrecta: 1 // x^2 + x - 6 (opción 2, índice 1)
+        respuestaCorrecta: 1 // x^2 + x - 6 
     },
     {
         id: 17,
         pregunta: "18. ¿Cuántos lados tiene un hexágono?",
         opciones: ["8", "3", "5", "6"],
-        respuestaCorrecta: 3 // 6 es la opción 4 (índice 3)
+        respuestaCorrecta: 3 // 6  
+    },
+    {
+        id: 18,
+        pregunta: "19. ¿Cuánto es el 0,5% de 200?",
+        opciones: ["10", "1", "5", "2"],
+        respuestaCorrecta: 1 // 1 
+    },
+    {
+        id: 19,
+        pregunta: "20. ¿Cuánto es 1/4 + 1/2?",
+        opciones: ["3/4", "1", "2/6", "1/4"],
+        respuestaCorrecta: 0 //
     }
 ];
 
