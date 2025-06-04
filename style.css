@@ -302,6 +302,36 @@ input:focus {
     letter-spacing: 1px;
     color: white;
 }
+/* Efecto hover con animación */
+.comenzarbtn:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding-right: 40px; /* Espacio para el icono */
+}
+
+/* Icono de play que aparece al hacer hover */
+.comenzarbtn:hover::after {
+    content: "▶";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    animation: pulse 0.8s infinite alternate;
+}
+
+/* Efecto al hacer clic */
+.comenzarbtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Animación de latido para el icono */
+@keyframes pulse {
+    from { transform: translateY(-50%) scale(0.9); opacity: 0.8; }
+    to { transform: translateY(-50%) scale(1.1); opacity: 1; }
+}
 
 .pausarbtn {
     background-color: #ffc107;
@@ -317,13 +347,37 @@ input:focus {
     transition: var(--transicion);
     text-transform: uppercase;
     letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.pausarbtn {
+background-color: #ffc107;
+color: #212529;
+}
+
+.pausarbtn:hover {
+background-color: #e0a800;
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+padding-right: 40px;
+}
+
+.pausarbtn:hover::after {
+content: "⏸";
+position: absolute;
+right: 15px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 1.2rem;
+animation: pulse 0.8s infinite alternate;
 }
 
 .resetearbtn {
     background-color: #dc3545; 
     display: block;
     width: 150px;
-    padding: 12px;
+    padding: 12px 25px;
     margin: 25px auto 0;
     border-radius: 30px;
     border: none;
@@ -333,9 +387,45 @@ input:focus {
     text-transform: uppercase;
     letter-spacing: 1px;
     color: white;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.resetearbtn {
+background-color: #dc3545;
+color: white;
 }
 
+.resetearbtn:hover {
+background-color: #c82333;
+transform: translateY(-3px);
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+padding-right: 40px;
+}
+
+.resetearbtn:hover::after {
+content: "↻";
+position: absolute;
+right: 15px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 1.2rem;
+animation: spin 0.8s linear infinite;
+}
+
+
+
 /* Botones */
+
+.pausarbtn:active, .resetearbtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Transición suave para todos los botones */
+.comenzarbtn, .pausarbtn, .resetearbtn {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
 .Finalizar, .btn-volver {
     padding: 12px 25px;

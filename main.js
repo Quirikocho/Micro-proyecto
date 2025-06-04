@@ -191,7 +191,7 @@ function iniciarSesion(nombre) {
 /* ========== FUNCIONES DEL QUIZ ========== */
 
 function seleccionarPreguntasAleatorias() {
-    // Mezcla las preguntas usando el algoritmo Fisher-Yates
+     // Mezcla las preguntas usando el algoritmo Fisher-Yates
     const shuffled = [...todasLasPreguntas].sort(() => 0.5 - Math.random());
     preguntasSeleccionadas = shuffled.slice(0, NUM_PREGUNTAS);
     opcion_elegida = new Array(NUM_PREGUNTAS).fill(-1); // -1 significa no respondida
@@ -236,22 +236,29 @@ function calcularPuntaje() {
     };
 }
 
-// Modifica la función comenzarTimer
 function comenzarTimer() {
     if (!estaActivo) {
-        tiempoDisplay.style.color = '#333';
-        tiempoDisplay.style.fontWeight = 'normal';
+        // Limpiar intervalo existente
+        if (intervalo) {
+            clearInterval(intervalo);
+        }
         
+        // Iniciar nuevo timer
         intervalo = setInterval(() => {
             segundos++;
             actualizarDisplay();
+            
+            if (segundos >= TIEMPO_LIMITE) {
+                pausarTimer();
+                tiempoDisplay.style.color = 'red';
+                tiempoDisplay.style.fontWeight = 'bold';
+                finalizarQuiz();
+            }
         }, 1000);
-        estaActivo = true;
         
-        // Habilitar/deshabilitar botones
-        comenzarBtn.disabled = true;
-        pausarBtn.disabled = false;
-        resetearBtn.disabled = false;
+        estaActivo = true;
+        tiempoDisplay.style.color = '#333';
+        tiempoDisplay.style.fontWeight = 'normal';
     }
 }
 
@@ -265,27 +272,35 @@ function pausarTimer() {
     pausarBtn.disabled = true;
 }
 
-// Modifica la función resetearTimer
 function resetearTimer() {
+ // 1. Detener el timer si está activo
     pausarTimer();
+    
+    // 2. Reiniciar el tiempo a cero
     segundos = 0;
-    tiempoDisplay.style.color = '#333';
-    tiempoDisplay.style.fontWeight = 'normal';
     actualizarDisplay();
     
-    // Habilitar/deshabilitar botones
-    comenzarBtn.disabled = false;
-    pausarBtn.disabled = true;
-    resetearBtn.disabled = true;
+    // 3. Restablecer estilos visuales
+    tiempoDisplay.style.color = '#333';
+    tiempoDisplay.style.fontWeight = 'normal';
+    
+    // 4. Generar nuevas preguntas aleatorias
+    seleccionarPreguntasAleatorias();
+    mostrarPreguntas();
+    
+    // 5. Iniciar el timer automáticamente
+    comenzarTimer();
+    
+    // 6. Actualizar estado de los botones
+    comenzarBtn.disabled = true;   // Deshabilitar "Comenzar"
+    pausarBtn.disabled = false;    // Habilitar "Pausar"
+    resetearBtn.disabled = false;  // Habilitar "Resetear
 }
 
-// Modifica la función iniciarQuiz para que no comience automáticamente
 function iniciarQuiz() {
     seleccionarPreguntasAleatorias();
     mostrarPreguntas();
     resetearTimer(); // Esto pondrá el timer a 0 y deshabilitará los botones adecuados
-    
-    // No llamar a comenzarTimer() aquí para que no empiece automáticamente
 }
 
 // Añade event listeners para los botones del temporizador
@@ -326,13 +341,25 @@ function actualizarDisplay() {
 
 function comenzarTimer() {
     if (!estaActivo) {
-        tiempoDisplay.style.color = '#333';
-        tiempoDisplay.style.fontWeight = 'normal';
+        // Limpiar intervalo existente por si acaso
+        if (intervalo) {
+            clearInterval(intervalo);
+        }
         
+        // Iniciar nuevo intervalo
         intervalo = setInterval(() => {
             segundos++;
             actualizarDisplay();
+            
+            // Verificar si se alcanzó el tiempo límite
+            if (segundos >= TIEMPO_LIMITE) {
+                pausarTimer();
+                tiempoDisplay.style.color = 'red';
+                tiempoDisplay.style.fontWeight = 'bold';
+                finalizarQuiz();
+            }
         }, 1000);
+        
         estaActivo = true;
     }
 }
@@ -342,13 +369,6 @@ function pausarTimer() {
     estaActivo = false;
 }
 
-function resetearTimer() {
-    pausarTimer();
-    segundos = 0;
-    tiempoDisplay.style.color = '#333';
-    tiempoDisplay.style.fontWeight = 'normal';
-    actualizarDisplay();
-}
 
 /* ========== FUNCIONES PRINCIPALES ========== */
 
@@ -356,7 +376,15 @@ function iniciarQuiz() {
     seleccionarPreguntasAleatorias();
     mostrarPreguntas();
     resetearTimer();
+    
+    // Forzar el inicio del timer
+    estaActivo = false; // Asegurarnos que el estado sea consistente
     comenzarTimer();
+    
+    // Actualizar estado de los botones
+    comenzarBtn.disabled = true;
+    pausarBtn.disabled = false;
+    resetearBtn.disabled = false;
 }
 
 function finalizarQuiz() {
@@ -410,7 +438,7 @@ document.getElementById('btn-registro').addEventListener('click', () => {
         if (registrarUsuario(nombre, email)) {
             document.getElementById('nombre-usuario').textContent = nombre;
             cambiarPagina(true);
-            iniciarQuiz();
+            iniciarQuiz(); // Esto ahora iniciará automáticamente el timer
         }
     } else {
         alert('Por favor complete todos los campos');
@@ -425,7 +453,7 @@ document.getElementById('btn-login').addEventListener('click', () => {
         if (usuario) {
             document.getElementById('nombre-usuario').textContent = usuario.nombre;
             cambiarPagina(true);
-            iniciarQuiz();
+            iniciarQuiz(); // Esto ahora iniciará automáticamente el timer
         }
     } else {
         alert('Por favor ingrese su nombre de usuario');
