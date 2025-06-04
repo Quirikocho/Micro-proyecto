@@ -159,8 +159,8 @@ function mostrarPreguntas() {
             ${pregunta.opciones.map((opcion, i) => `
                 <label class="Opciones">
                     <input type="radio" value="${i}" name="p${index}" 
-                           ${opcion_elegida[index] === i ? 'checked' : ''}
-                           onclick="respuesta(${index}, ${i})">
+                        ${opcion_elegida[index] === i ? 'checked' : ''}
+                        onclick="respuesta(${index}, ${i})">
                     ${opcion}
                 </label>
             `).join('')}
