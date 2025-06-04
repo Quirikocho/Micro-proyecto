@@ -1,35 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>MicroProyecto</title>
+    <title>Login | Quiz Matemático</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
-<body> 
-<header>
-    <h1>BIENVENIDO A ESTE QUIZ MATEMATICO</h1>
-    <p>Hecho por Juan Moreira y Jose Saggiomo</p>
-    <div class="formulario"></div>
-        <form method="post">
-            <div class= "username">
-                <br>
-                <label><button class> <b>Registrarse</b></button></label> 
-                <label><button class> <b>Iniciar Sesion</b></button></label> 
-
-                <br>
-                <br>
-                <input type="text" placeholder="Escribe tu nombre" required>
-                <input type="email"placeholder="Escribe tu correo" required>
-
-                <input type="text" placeholder="Escribe tu nombre" required>
-
-                <br>
-                <br>
-
-            <div>
+<body>
+    <header>
+        <h1>BIENVENIDO AL QUIZ MATEMÁTICO</h1>
+        <p class="authors">Creado por Juan Moreira y Jose Saggiomo</p>
+    </header>
+    
+    <div class="auth-container">
+        <!-- Formulario de Inicio de Sesión -->
+        <div id="login-form" class="formulario-container pagina-activa">
+            <h2 class="form-title">Iniciar Sesión</h2>
+            <form id="login">
+                <div class="form-group">
+                    <label for="login-email">Correo electrónico</label>
+                    <input type="email" id="login-email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Contraseña</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-formulario btn-login" href="index.html" href="main.js">Ingresar</button>
             </form>
-    <div>
-            
+            <div class="separador">o</div>
+            <div class="form-footer">
+                ¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a>
+            </div>
+        </div>
+        
+        <!-- Formulario de Registro -->
+        <div id="register-form" class="formulario-container pagina-oculta">
+            <h2 class="form-title">Crear Cuenta</h2>
+            <form id="register">
+                <div class="form-group">
+                    <label for="register-name">Nombre completo</label>
+                    <input type="text" id="register-name" placeholder="Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Correo electrónico</label>
+                    <input type="email" id="register-email" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Contraseña</label>
+                    <input type="password" id="register-password" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Confirmar contraseña</label>
+                    <input type="password" id="register-confirm" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-formulario">Registrarse</button>
+            </form>
+            <div class="separador">o</div>
+            <div class="form-footer">
+                ¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login.js"></script>
 </body>
 </html>

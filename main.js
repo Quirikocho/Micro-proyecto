@@ -295,7 +295,7 @@ resetearBtn.addEventListener('click', resetearTimer);
 
 finalizarBtn.addEventListener('click', () => {
     finalizarQuiz();
-    pausarTimer(); // Asegurarse de que el timer se detenga al finalizar
+    pausarTimer();
 });
 
 
@@ -432,8 +432,7 @@ document.getElementById('btn-login').addEventListener('click', () => {
     }
 });
 
-// Event listener para el botón volver
-document.getElementById('btn-volver').addEventListener('click', () => {
+btnVolver.addEventListener('click', () => {
     cambiarPagina(false);
     resetearTimer();
 });
