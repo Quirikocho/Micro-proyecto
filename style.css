@@ -564,6 +564,16 @@ animation: spin 0.8s linear infinite;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+/* Estilo cuando el botón está en modo "Reanudar" */
+.pausarbtn[data-state="paused"] {
+    background-color: #17a2b8 !important;
+    color: white !important;
+}
+
+.pausarbtn[data-state="paused"]:hover {
+    background-color: #138496 !important;
+}
+
 /* Estados */
 .pagina-activa {
     display: block;
@@ -618,4 +628,106 @@ animation: spin 0.8s linear infinite;
         width: 100%;
         max-width: 200px;
     }
+}
+
+/* Estilos para la tabla de líderes */
+.tabla-lideres {
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.tabla-lideres h2 {
+    color: #2161c2;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.tabla-lideres table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.tabla-lideres th, 
+.tabla-lideres td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-lideres th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.tabla-lideres tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.tabla-lideres tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Estilo para el modal de resultados */
+.resultado-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.resultado-contenido {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.resultado-contenido h2 {
+    color: var(--color-timer);
+    margin-bottom: 1rem;
+}
+
+.resultado-contenido p {
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+}
+
+.resultado-contenido strong {
+    color: var(--respuesta-correcta);
+    font-weight: bold;
+}
+
+.resultado-contenido button {
+    padding: 0.8rem 1.5rem;
+    background: var(--color-botones);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transicion);
+    margin-top: 1.5rem;
+    font-size: 1rem;
+}
+
+.resultado-contenido button:hover {
+    background: #138496;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }

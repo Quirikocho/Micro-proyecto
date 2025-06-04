@@ -236,65 +236,44 @@ function calcularPuntaje() {
     };
 }
 
-function comenzarTimer() {
-    if (!estaActivo) {
-        // Limpiar intervalo existente
-        if (intervalo) {
-            clearInterval(intervalo);
-        }
-        
-        // Iniciar nuevo timer
-        intervalo = setInterval(() => {
-            segundos++;
-            actualizarDisplay();
-            
-            if (segundos >= TIEMPO_LIMITE) {
-                pausarTimer();
-                tiempoDisplay.style.color = 'red';
-                tiempoDisplay.style.fontWeight = 'bold';
-                finalizarQuiz();
-            }
-        }, 1000);
-        
-        estaActivo = true;
-        tiempoDisplay.style.color = '#333';
-        tiempoDisplay.style.fontWeight = 'normal';
+// Modifica la función pausarTimer
+function pausarTimer() {
+    if (estaActivo) {
+        // Pausar el timer
+        clearInterval(intervalo);
+        estaActivo = false;
+        pausarBtn.textContent = "Reanudar"; // Cambia el texto del botón
+        pausarBtn.style.backgroundColor = "#17a2b8"; // Cambia el color a azul
+    } else {
+        // Reanudar el timer
+        comenzarTimer();
+        pausarBtn.textContent = "Pausar"; // Restaura el texto original
+        pausarBtn.style.backgroundColor = "#ffc107"; // Restaura el color amarillo
     }
 }
 
-// Modifica la función pausarTimer
-function pausarTimer() {
-    clearInterval(intervalo);
+function resetearTimer() {
+    pausarTimer(); // Esto detendrá el timer si está activo
+    
+    // Reiniciar variables
+    segundos = 0;
     estaActivo = false;
     
-    // Habilitar/deshabilitar botones
-    comenzarBtn.disabled = false;
-    pausarBtn.disabled = true;
-}
-
-function resetearTimer() {
- // 1. Detener el timer si está activo
-    pausarTimer();
-    
-    // 2. Reiniciar el tiempo a cero
-    segundos = 0;
+    // Actualizar display
     actualizarDisplay();
-    
-    // 3. Restablecer estilos visuales
     tiempoDisplay.style.color = '#333';
     tiempoDisplay.style.fontWeight = 'normal';
     
-    // 4. Generar nuevas preguntas aleatorias
+    // Generar nuevas preguntas aleatorias
     seleccionarPreguntasAleatorias();
     mostrarPreguntas();
     
-    // 5. Iniciar el timer automáticamente
-    comenzarTimer();
+    // Restaurar estado del botón Pausar
+    pausarBtn.textContent = "Pausar";
+    pausarBtn.style.backgroundColor = "#ffc107";
     
-    // 6. Actualizar estado de los botones
-    comenzarBtn.disabled = true;   // Deshabilitar "Comenzar"
-    pausarBtn.disabled = false;    // Habilitar "Pausar"
-    resetearBtn.disabled = false;  // Habilitar "Resetear
+    // Iniciar automáticamente el nuevo timer
+    comenzarTimer();
 }
 
 function iniciarQuiz() {
@@ -341,17 +320,16 @@ function actualizarDisplay() {
 
 function comenzarTimer() {
     if (!estaActivo) {
-        // Limpiar intervalo existente por si acaso
+        // Limpiar intervalo existente
         if (intervalo) {
             clearInterval(intervalo);
         }
         
-        // Iniciar nuevo intervalo
+        // Iniciar nuevo timer
         intervalo = setInterval(() => {
             segundos++;
             actualizarDisplay();
             
-            // Verificar si se alcanzó el tiempo límite
             if (segundos >= TIEMPO_LIMITE) {
                 pausarTimer();
                 tiempoDisplay.style.color = 'red';
@@ -361,14 +339,14 @@ function comenzarTimer() {
         }, 1000);
         
         estaActivo = true;
+        tiempoDisplay.style.color = '#333';
+        tiempoDisplay.style.fontWeight = 'normal';
+        
+        // Asegurar que el botón de pausa muestre el estado correcto
+        pausarBtn.textContent = "Pausar";
+        pausarBtn.style.backgroundColor = "#ffc107";
     }
 }
-
-function pausarTimer() {
-    clearInterval(intervalo);
-    estaActivo = false;
-}
-
 
 /* ========== FUNCIONES PRINCIPALES ========== */
 
@@ -465,5 +443,91 @@ btnVolver.addEventListener('click', () => {
     resetearTimer();
 });
 
+/* ========== SISTEMA DE PUNTUACIÓN ========== */
+
+function guardarResultado(puntaje, tiempo) {
+    const usuarioActual = document.getElementById('nombre-usuario').textContent;
+    const fecha = new Date().toLocaleDateString();
+    
+    const nuevoResultado = {
+        nombre: usuarioActual,
+        puntaje: puntaje.porcentaje,
+        tiempo: tiempo,
+        fecha: fecha,
+        tema: "Matemáticas"
+    };
+    
+    // Obtener resultados existentes
+    let resultados = JSON.parse(localStorage.getItem('resultadosQuiz')) || [];
+    
+    // Agregar nuevo resultado
+    resultados.push(nuevoResultado);
+    
+    // Ordenar y guardar solo los top 5
+    resultados.sort((a, b) => b.puntaje - a.puntaje || a.tiempo.localeCompare(b.tiempo));
+    const topResultados = resultados.slice(0, 5);
+    
+    localStorage.setItem('resultadosQuiz', JSON.stringify(topResultados));
+    
+    // Actualizar tabla de líderes
+    actualizarTablaLideres();
+}
+
+function actualizarTablaLideres() {
+    const resultados = JSON.parse(localStorage.getItem('resultadosQuiz')) || [];
+    const tablaBody = document.getElementById('tabla-puntuaciones');
+    
+    tablaBody.innerHTML = '';
+    
+    resultados.forEach((resultado, index) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${resultado.nombre}</td>
+            <td>${resultado.puntaje}%</td>
+            <td>${resultado.tiempo}</td>
+            <td>${resultado.fecha}</td>
+        `;
+        tablaBody.appendChild(fila);
+    });
+}
+
+// Modifica finalizarQuiz para incluir guardarResultado
+function finalizarQuiz() {
+    pausarTimer();
+    
+    const puntaje = calcularPuntaje();
+    const tiempoFormateado = formatearTiempo(segundos);
+    
+    // Guardar resultado
+    guardarResultado(puntaje, tiempoFormateado);
+    
+    // Mostrar modal con resultados
+    const resultadoHTML = `
+        <div class="resultado-modal">
+            <div class="resultado-contenido">
+                <h2>Resultados del Quiz</h2>
+                <p>Respondiste <strong>${puntaje.correctas} de ${puntaje.total}</strong> preguntas correctamente</p>
+                <p>Porcentaje de aciertos: <strong>${puntaje.porcentaje}%</strong></p>
+                <p>Tiempo empleado: <strong>${tiempoFormateado}</strong></p>
+                <button onclick="this.parentElement.parentElement.remove()">Aceptar</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', resultadoHTML);
+}
+
+// Llama a actualizarTablaLideres cuando la página cargue
+document.addEventListener('DOMContentLoaded', function() {
+    actualizarTablaLideres();
+});
+
+// Actualiza la tabla al volver al inicio
+btnVolver.addEventListener('click', () => {
+    cambiarPagina(false);
+    resetearTimer();
+    actualizarTablaLideres();
+});
 // Inicialización
 actualizarDisplay();
