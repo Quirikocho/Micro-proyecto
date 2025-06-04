@@ -134,11 +134,59 @@ const NUM_PREGUNTAS = 10;
 
 // Elementos del DOM
 const tiempoDisplay = document.querySelector('.tiempo');
-const comenzarBtn = document.querySelector('.comenzarbtn');
-const pausarBtn = document.querySelector('.pausarbtn');
-const resetearBtn = document.querySelector('.resetearbtn');
-const finalizarBtn = document.querySelector('.Finalizar');
+const comenzarBtn = document.getElementById('comenzar');
+const pausarBtn = document.getElementById('pausar');
+const resetearBtn = document.getElementById('resetear');
+const finalizarBtn = document.getElementById('Finalizar');
 const container = document.querySelector('.container');
+const btnVolver = document.getElementById('btn-volver');
+
+// Elementos del formulario de acceso
+const paginaInicio = document.getElementById('pagina-inicio');
+const paginaQuiz = document.getElementById('pagina-quiz');
+const btnRegistro = document.getElementById('btn-registro');
+const btnLogin = document.getElementById('btn-login');
+const nombreRegistro = document.getElementById('nombre-registro');
+const emailRegistro = document.getElementById('email-registro');
+const nombreLogin = document.getElementById('nombre-login');
+const nombreUsuarioDisplay = document.getElementById('nombre-usuario');
+
+// Base de datos simulada de usuarios
+let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+/* ========== FUNCIONES DE USUARIO ========== */
+
+function registrarUsuario(nombre, email) {
+    // Validar que no exista el usuario
+    const existeUsuario = usuarios.some(user => user.nombre === nombre || user.email === email);
+    
+    if (existeUsuario) {
+        alert('El nombre de usuario o correo electrónico ya está registrado');
+        return false;
+    }
+    
+    // Crear nuevo usuario
+    const nuevoUsuario = {
+        nombre,
+        email,
+        puntajes: []
+    };
+    
+    usuarios.push(nuevoUsuario);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+    return true;
+}
+
+function iniciarSesion(nombre) {
+    const usuario = usuarios.find(user => user.nombre === nombre);
+    
+    if (!usuario) {
+        alert('Usuario no encontrado');
+        return false;
+    }
+    
+    return usuario;
+}
 
 /* ========== FUNCIONES DEL QUIZ ========== */
 
@@ -187,6 +235,69 @@ function calcularPuntaje() {
         porcentaje: Math.round((cantidad_correctas / NUM_PREGUNTAS) * 100)
     };
 }
+
+// Modifica la función comenzarTimer
+function comenzarTimer() {
+    if (!estaActivo) {
+        tiempoDisplay.style.color = '#333';
+        tiempoDisplay.style.fontWeight = 'normal';
+        
+        intervalo = setInterval(() => {
+            segundos++;
+            actualizarDisplay();
+        }, 1000);
+        estaActivo = true;
+        
+        // Habilitar/deshabilitar botones
+        comenzarBtn.disabled = true;
+        pausarBtn.disabled = false;
+        resetearBtn.disabled = false;
+    }
+}
+
+// Modifica la función pausarTimer
+function pausarTimer() {
+    clearInterval(intervalo);
+    estaActivo = false;
+    
+    // Habilitar/deshabilitar botones
+    comenzarBtn.disabled = false;
+    pausarBtn.disabled = true;
+}
+
+// Modifica la función resetearTimer
+function resetearTimer() {
+    pausarTimer();
+    segundos = 0;
+    tiempoDisplay.style.color = '#333';
+    tiempoDisplay.style.fontWeight = 'normal';
+    actualizarDisplay();
+    
+    // Habilitar/deshabilitar botones
+    comenzarBtn.disabled = false;
+    pausarBtn.disabled = true;
+    resetearBtn.disabled = true;
+}
+
+// Modifica la función iniciarQuiz para que no comience automáticamente
+function iniciarQuiz() {
+    seleccionarPreguntasAleatorias();
+    mostrarPreguntas();
+    resetearTimer(); // Esto pondrá el timer a 0 y deshabilitará los botones adecuados
+    
+    // No llamar a comenzarTimer() aquí para que no empiece automáticamente
+}
+
+// Añade event listeners para los botones del temporizador
+comenzarBtn.addEventListener('click', comenzarTimer);
+pausarBtn.addEventListener('click', pausarTimer);
+resetearBtn.addEventListener('click', resetearTimer);
+
+finalizarBtn.addEventListener('click', () => {
+    finalizarQuiz();
+    pausarTimer(); // Asegurarse de que el timer se detenga al finalizar
+});
+
 
 /* ========== FUNCIONES DEL TEMPORIZADOR ========== */
 
@@ -254,7 +365,7 @@ function finalizarQuiz() {
     const puntaje = calcularPuntaje();
     const tiempoFormateado = formatearTiempo(segundos);
     
-    // Crear un modal o alerta con los resultados
+    // Crear un modal con los resultados
     const resultadoHTML = `
         <div class="resultado-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
             <div style="background: white; padding: 2rem; border-radius: 10px; text-align: center; max-width: 500px;">
@@ -270,12 +381,62 @@ function finalizarQuiz() {
     document.body.insertAdjacentHTML('beforeend', resultadoHTML);
 }
 
+// Función para cambiar entre páginas
+function cambiarPagina(mostrarQuiz) {
+    const paginaInicio = document.getElementById('pagina-inicio');
+    const paginaQuiz = document.getElementById('pagina-quiz');
+    
+    if (mostrarQuiz) {
+        paginaInicio.classList.remove('pagina-activa');
+        paginaInicio.classList.add('pagina-oculta');
+        paginaQuiz.classList.remove('pagina-oculta');
+        paginaQuiz.classList.add('pagina-activa');
+    } else {
+        paginaQuiz.classList.remove('pagina-activa');
+        paginaQuiz.classList.add('pagina-oculta');
+        paginaInicio.classList.remove('pagina-oculta');
+        paginaInicio.classList.add('pagina-activa');
+    }
+}
+
 /* ========== EVENT LISTENERS ========== */
 
-comenzarBtn.addEventListener('click', iniciarQuiz);
-pausarBtn.addEventListener('click', pausarTimer);
-resetearBtn.addEventListener('click', resetearTimer);
-finalizarBtn.addEventListener('click', finalizarQuiz);
+// Eventos del quiz
+document.getElementById('btn-registro').addEventListener('click', () => {
+    const nombre = document.getElementById('nombre-registro').value.trim();
+    const email = document.getElementById('email-registro').value.trim();
+    
+    if (nombre && email) {
+        if (registrarUsuario(nombre, email)) {
+            document.getElementById('nombre-usuario').textContent = nombre;
+            cambiarPagina(true);
+            iniciarQuiz();
+        }
+    } else {
+        alert('Por favor complete todos los campos');
+    }
+});
+
+document.getElementById('btn-login').addEventListener('click', () => {
+    const nombre = document.getElementById('nombre-login').value.trim();
+    
+    if (nombre) {
+        const usuario = iniciarSesion(nombre);
+        if (usuario) {
+            document.getElementById('nombre-usuario').textContent = usuario.nombre;
+            cambiarPagina(true);
+            iniciarQuiz();
+        }
+    } else {
+        alert('Por favor ingrese su nombre de usuario');
+    }
+});
+
+// Event listener para el botón volver
+document.getElementById('btn-volver').addEventListener('click', () => {
+    cambiarPagina(false);
+    resetearTimer();
+});
 
 // Inicialización
 actualizarDisplay();

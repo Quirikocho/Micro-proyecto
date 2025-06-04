@@ -7,20 +7,45 @@
     <title>MicroProyecto</title>
 </head>
 <body>
-<header>
-    <h1>BIENVENIDO A ESTE QUIZ MATEMATICO</h1>
-    <p>Hecho por Juan Moreira y Jose Saggiomo</p>
-    <div class="contenedor-tiempo">
-        <div class="tiempo"> 00:00:00 </div>
-        <div class="timer">
-            <button class="comenzarbtn" id= "comenzar"> comenzar </button>
-            <button class="pausarbtn" id= "pausar"> pausar </button>
-            <button class="resetearbtn" id= "resetear"> resetear </button>
+    <!-- Página de Inicio (Registro/Login) -->
+    <div id="pagina-inicio" class="pagina-activa">
+        <div class="formulario-container">
+            <h1>BIENVENIDO AL QUIZ MATEMÁTICO</h1>
+            <p>Hecho por Juan Moreira y Jose Saggiomo</p>
+            
+            <div class="form-group">
+                <h2>Registrarse</h2>
+                <input type="text" id="nombre-registro" placeholder="Nombre de usuario" required>
+                <input type="email" id="email-registro" placeholder="Correo electrónico" required>
+                <button id="btn-registro" class="btn-formulario">Registrarse</button>
+            </div>
+            
+            <div class="separador">O</div>
+            
+            <div class="form-group">
+                <h2>Iniciar Sesión</h2>
+                <input type="text" id="nombre-login" placeholder="Nombre de usuario" required>
+                <button id="btn-login" class="btn-formulario">Iniciar Sesión</button>
+            </div>
         </div>
+    </div>
 
-</div>
-    </header>
-    <div class="container">
+    <!-- Página del Quiz (oculta inicialmente) -->
+    <div id="pagina-quiz" class="pagina-oculta">
+        <header>
+            <h1 id="titulo-bienvenida">BIENVENIDO, <span id="nombre-usuario"></span></h1>
+            <p>Hecho por Juan Moreira y Jose Saggiomo</p>
+            <div class="contenedor-tiempo">
+                <div class="tiempo">00:00:00</div>
+                <div class="timer">
+                    <button class="comenzarbtn" id="comenzar">Comenzar</button>
+                    <button class="pausarbtn" id="pausar">Pausar</button>
+                    <button class="resetearbtn" id="resetear">Resetear</button>
+                </div>
+            </div>
+        </header>
+
+    <div class="container" id="container-preguntas">
         <Section>
             <div id="Preguntas">
                 <h2 class="Inicio">Estas preparado?</h2>
@@ -325,8 +350,10 @@
                     <input type="radio" value="3" name="p19" onclick="respuesta(19,this)"> 1/4
                 </label>
         </Section>
-    </div>
     <button class="Finalizar" id="Finalizar">Finalizar</button>
-    <script type="module" src="./main.js"></script>
+        <button class="btn-volver" id="btn-volver">Volver al Inicio</button>
+    </div>
+
+    <script src="./main.js"></script>
 </body>
 </html>

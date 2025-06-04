@@ -239,4 +239,102 @@ section:nth-child(odd) {
     .timer-btn {
         flex-grow: 1;
     }
+.pagina-activa {
+    display: block;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.pagina-oculta {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.formulario-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group h2 {
+    color: #2161c2;
+    margin-bottom: 1rem;
+}
+
+.separador {
+    text-align: center;
+    margin: 1.5rem 0;
+    color: #666;
+    font-weight: bold;
+    position: relative;
+}
+
+.separador:before, .separador:after {
+    content: "";
+    display: inline-block;
+    width: 30%;
+    height: 1px;
+    background: #ddd;
+    position: absolute;
+    top: 50%;
+}
+
+.separador:before {
+    left: 0;
+}
+
+.separador:after {
+    right: 0;
+}
+
+.btn-formulario {
+    width: 100%;
+    padding: 12px;
+    background: #2161c2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-formulario:hover {
+    background: #1a4e9b;
+    transform: translateY(-2px);
+}
+
+.btn-volver {
+    display: block;
+    width: 200px;
+    padding: 12px;
+    margin: 20px auto;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-volver:hover {
+    background: #5a6268;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 }
